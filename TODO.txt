@@ -1,0 +1,25 @@
+Things left to be done on this app:
+
+1.  Add locking to prevent multiple instances of the script from running
+    simultaneously.
+
+2.  Instructions for how to attach as a folder-action script
+
+3.  Write to a log file that Console.app will read
+
+4.  Use `Getopt` for configs
+
+5.  Run `cleanup.pl` steps at end (maybe make this configurable)
+
+6.  Test suite
+
+    a.  Mock/invoker for testing
+    b.  Sample PDF files for "integration"-style testing
+
+7.  Better error handling and timeout handling
+
+8.  Investigate: Is it still really necessary to run only one instance
+    of the Send to OCR app at a time? Can more than one instance run
+    with the newest version?
+
+
