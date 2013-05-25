@@ -112,7 +112,7 @@ sub do_ocr {
     
     wait_until_with_timeout(
         timeout =>  60 * 5, # 5 minutes
-        interval => 30,     # check for OCR companion every 30 secs
+        interval => 10,     # check for OCR companion every 30 secs
         _file    => $file,
         sub      => sub {
             my ($ctx) = @_;
