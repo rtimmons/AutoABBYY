@@ -12,8 +12,6 @@ GetOptions("dir=s" => \$dir);
 
 my $ext = " processed by FineReader.pdf";
 
-print 'cd ';
-print `pwd`;
 
 foreach (<$dir/*.pdf>) {
     next if /$ext$/;
