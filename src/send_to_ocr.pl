@@ -71,7 +71,9 @@ sub main {
         @all;
     mylog(
         "Won't try to OCR following since weren't created by [$spotlight_creator]:",
-        map { "    [$_] (created by $creators{$_})" } @wont_do
+        "",
+        (map { "    [$_] (created by $creators{$_})" } @wont_do),
+        ""
     );
     
     # do nothing unless there's stuff to do
@@ -134,7 +136,7 @@ sub do_ocr {
             
             # mylog $ctx; # Enable if really really debugging :)
             
-            mylog "Looking for file [$ctx->{needle}]";
+            mylog "Looking for file [$ctx->{needle}]", "";
             
             my $xists = -f $ctx->{needle};
             
@@ -147,21 +149,21 @@ sub do_ocr {
             $ctx->{commands_run} ||= {};
 
             if ( !$xists ) {
-                mylog "  File [$ctx->{needle}] doesn't exist.";
+                mylog "    File [$ctx->{needle}] doesn't exist.";
                 if ( $ctx->{commands_run}{$cmd} ) {
-                    mylog "  Already running OCR.  Waiting.";
+                    mylog "    Already running OCR.  Waiting.";
                 }
                 else {
                     my $out = `$cmd`;
                     $ctx->{commands_run}{$cmd} = 1;
-                    mylog "  Ran command [$cmd]";
+                    mylog "    Ran command [$cmd]";
                     chomp($out);
-                    mylog "  Command output [$out] ('missing value' is okay)";                    
+                    mylog "    Command output [$out] ('missing value' is okay)";                    
                 }
             }
             else {
                 # file does exist
-                mylog "  File [$ctx->{needle}] exists.  Done with this scan.";
+                mylog "    File [$ctx->{needle}] exists.  Done with this scan.";
             }
             
             return $xists;
