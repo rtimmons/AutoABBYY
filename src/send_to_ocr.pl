@@ -33,8 +33,9 @@ use warnings;
 # OCRed
 our $suffix = ' processed by FineReader.pdf';
 
-# Only try to OCR files with this file creator metadata
-our $spotlight_creator = 'ScanSnap Manager';
+# Only try to OCR files with these file creator metadata values
+our %spotlight_creators = map { $_ => 1 } 
+    ('ScanSnap Manager','None');
 
 # Look for PDFs in the following dir to send to OCR
 our $source_dir = '/Users/rtimmons/Dropbox/Inbox';
@@ -62,15 +63,15 @@ sub main {
 
     # Grab only those created by $spotlight_creator
     my @todo = 
-        grep { $creators{$_} eq $spotlight_creator }
+        grep { $spotlight_creators{$creators{$_}} }
         @all;
 
     # Log the ones that we won't do
     my @wont_do = 
-        grep { $creators{$_} ne $spotlight_creator }
+        grep { !$spotlight_creators{$creators{$_}} }
         @all;
     mylog(
-        "Won't try to OCR following since weren't created by [$spotlight_creator]:",
+        "Won't try to OCR following since weren't created by [%spotlight_creators]:",
         "",
         (map { "    [$_] (created by $creators{$_})" } @wont_do),
         ""
